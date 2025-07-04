@@ -9,7 +9,6 @@ import string
 from datetime import datetime, timedelta
 import openai
 
-
 # Initialize Flask app
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -20,7 +19,7 @@ url = 0
 # Initialize extensions
 db.init_app(app)
 mail = Mail(app)
-api_key = app.config.get('openai_key')
+api_key = app.config.get('OPEN_AI_KEY')
 stripe.api_key = app.config.get('STRIPE_SECRET_KEY', 'placeholder')
 
 # Login manager setup
