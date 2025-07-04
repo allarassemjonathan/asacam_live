@@ -375,7 +375,7 @@ with app.app_context():
 if __name__ == '__main__':
     app.run(threaded=True, debug=True)
 
-api_key =  openai_key # TODO: Move to env vars later
+ # TODO: Move to env vars later
 import threading
 import cv2
 import logging
