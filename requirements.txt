@@ -14,3 +14,4 @@ openai
 requests
 gunicorn
 psycopg2
+opencv-python
