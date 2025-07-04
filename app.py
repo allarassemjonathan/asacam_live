@@ -8,6 +8,10 @@ import secrets
 import string
 from datetime import datetime, timedelta
 import openai
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -135,7 +139,6 @@ def index():
 
 @app.route('/mission')
 def mission():
-
     return render_template('mission.html', username=session.get('username'), prompt=prompt, date=datetime.now().strftime("%Y-%m-%d"), title=title)
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -414,41 +417,53 @@ video_queue = queue.Queue(maxsize=10)
 description_queue = queue.Queue(maxsize=50)
 is_streaming = False
 camera = None
-
 def initialize_camera():
-    """Simple camera initialization"""
-    global camera
-    global url
+    """Robust camera initialization that allows long waits"""
+    global camera, url
+
+    MAX_WAIT = 90  # seconds
+    LOG_INTERVAL = 5
+
     try:
         if camera is not None:
             camera.release()
-        
-        # setting the link to the video
+
         if url == '0':
             url = 0
+
         camera = cv2.VideoCapture(url)
-        
-        if not camera.isOpened():
-            logger.error("Cannot open camera")
-            return False
-            
-        # Basic settings
-        camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-        camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-        
-        # Test read
-        ret, frame = camera.read()
+
+        start_time = time.time()
+        last_log = 0
+
+        while not camera.isOpened():
+            elapsed = time.time() - start_time
+            if elapsed > MAX_WAIT:
+                logger.error(f"Camera failed to open after {MAX_WAIT} seconds.")
+                return False
+
+            if int(elapsed) - last_log >= LOG_INTERVAL:
+                logger.warning(f"Waiting for camera to open... ({int(elapsed)}s)")
+                last_log = int(elapsed)
+
+            time.sleep(1)
+
+        # Optional: Lower resolution to save memory
+        camera.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
+        camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
+
+        ret, _ = camera.read()
         if ret:
-            logger.info("Camera initialized successfully")
+            logger.info("Camera initialized successfully.")
             return True
         else:
-            logger.error("Camera opened but cannot read frames")
+            logger.error("Camera opened but cannot read frame.")
             camera.release()
             camera = None
             return False
-            
+
     except Exception as e:
-        logger.error(f"Camera initialization error: {str(e)}")
+        logger.error(f"Exception during camera init: {e}")
         return False
 
 @app.route('/get_descriptions')
