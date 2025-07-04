@@ -20,6 +20,7 @@ url = 0
 # Initialize extensions
 db.init_app(app)
 mail = Mail(app)
+openai_key = app.config.get('openai_key')
 stripe.api_key = app.config.get('STRIPE_SECRET_KEY', 'placeholder')
 
 # Login manager setup
@@ -376,7 +377,7 @@ if __name__ == '__main__':
 
 
 # My OpenAI API key - keep this secret!
-api_key = "***REMOVED***"  # TODO: Move to env vars later
+api_key =  openai_key # TODO: Move to env vars later
 import threading
 import cv2
 import logging

@@ -15,6 +15,8 @@ class Config:
     STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
     STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 
+    # openai key
+    openai_key = os.environ.get('openai_key')
     # payment
     PAYMENT_AMOUNT = 100
 
@@ -28,3 +30,5 @@ class Config:
 
     # Verification code expiry (5 minutes)
     VERIFICATION_CODE_EXPIRY = 300
+
+
