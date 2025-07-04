@@ -16,7 +16,7 @@ class Config:
     STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 
     # openai key
-    api_key = os.environ.get('openai_key')
+    openai_key = os.environ.get('OPEN_AI_KEY')
 
     # payment
     PAYMENT_AMOUNT = 100

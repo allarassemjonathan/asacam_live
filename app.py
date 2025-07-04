@@ -20,7 +20,7 @@ url = 0
 # Initialize extensions
 db.init_app(app)
 mail = Mail(app)
-openai_key = app.config.get('openai_key')
+api_key = app.config.get('openai_key')
 stripe.api_key = app.config.get('STRIPE_SECRET_KEY', 'placeholder')
 
 # Login manager setup
