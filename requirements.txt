@@ -12,3 +12,4 @@ blinker==1.6.3
 flask_cors
 openai
 requests
+gunicorn
