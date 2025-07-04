@@ -387,11 +387,16 @@
 }
 .message {
   padding: 8px 12px;
-  border-bottom: 1px solid #ddd;  /* Thin, light gray line between messages */
+  border-bottom: 100px solid #ddd;  /* Thin, light gray line between messages */
 }
 
 .message:last-child {
   border-bottom: none;  /* No border after the last message */
+}
+
+.message {
+  border-bottom: 0.5px solid rgb(255, 255, 255) !important;
+  z-index: 10 !important;
 }
 
   </style>
@@ -583,7 +588,7 @@
         
         // Title
         doc.setFontSize(20);
-        doc.setFont("ChakraPetch", "normal");
+        doc.setFont('ChakraPetch', "normal");
         doc.text('MISSION REPORT', pageWidth / 2, yPosition, { align: 'center' });
         yPosition += 20;
         
@@ -641,7 +646,7 @@
                 }
                 
                 // Message number
-                doc.setFont("ChakraPetch", 'bold');
+                doc.setFont("ChakraPetch", 'normal');
                 doc.text(`[${message.id}]`, margin, yPosition);
                 
                 // Message content (with text wrapping)
