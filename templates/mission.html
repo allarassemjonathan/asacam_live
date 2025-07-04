@@ -563,7 +563,7 @@
         doc.setFontChakraPetchRegular();
 
         // Use the font in the PDF
-        doc.setFont("ChakraPetchRegular", "normal");
+        doc.setFont("ChakraPetch", "normal");
         
         // Get mission details
         const missionTitleElement = document.getElementById('mission-title');
@@ -583,13 +583,13 @@
         
         // Title
         doc.setFontSize(20);
-        doc.setFont("ChakraPetchRegular", "normal");
+        doc.setFont("ChakraPetch", "normal");
         doc.text('MISSION REPORT', pageWidth / 2, yPosition, { align: 'center' });
         yPosition += 20;
         
         // Mission details
         doc.setFontSize(12);
-        doc.setFont("ChakraPetchRegular", "normal");
+        doc.setFont("ChakraPetch", "normal");
         doc.text(`Mission: ${missionTitle}`, margin, yPosition);
         yPosition += 10;
         doc.text(reporterInfo, margin, yPosition);
@@ -601,7 +601,7 @@
         
         // Transcript header
         doc.setFontSize(16);
-        doc.setFont('"ChakraPetch"', 'bold');
+        doc.setFont('ChakraPetch', 'normal');
         doc.text('TRANSCRIPT', margin, yPosition);
         yPosition += 15;
         
