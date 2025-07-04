@@ -13,3 +13,4 @@ flask_cors
 openai
 requests
 gunicorn
+psycopg2
