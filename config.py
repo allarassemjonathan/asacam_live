@@ -17,6 +17,7 @@ class Config:
 
     # openai key
     openai_key = os.environ.get('openai_key')
+    
     # payment
     PAYMENT_AMOUNT = 100
 
